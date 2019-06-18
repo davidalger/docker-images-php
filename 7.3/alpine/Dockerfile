@@ -12,7 +12,8 @@ RUN apk add --no-cache \
         libxml2-dev \
         libxslt-dev \
         libzip-dev \
-        rabbitmq-c-dev
+        rabbitmq-c-dev \
+        git
 
 # Install required PHP extensions
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \

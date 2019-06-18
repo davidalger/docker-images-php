@@ -34,7 +34,10 @@ PHP-FPM images also currently include Xdebug, an ini configuration including PHP
 
 ## Other Inclusions
 
-PHP-FPM Images also include the following:
 * [Composer](https://hub.docker.com/_/composer) copied in from the official `composer` image.
+* Git is installed as it is a dependency of the popular `cweagans/composer-patches` plugin.
+
+### PHP-FPM Specific
+
 * Pre-configured PS1 for `www-data` and `root` users including the working directory and a different color for the root prompt.
 * User `www-data` and group `www-data` use uid/gid of 1000 for simpler use across major desktop Linux distros.
