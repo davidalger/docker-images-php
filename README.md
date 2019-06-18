@@ -35,7 +35,6 @@ PHP-FPM images also currently include Xdebug, an ini configuration including PHP
 ## Other Inclusions
 
 * [Composer](https://hub.docker.com/_/composer) copied in from the official `composer` image.
-* Git is installed as it is a dependency of the popular `cweagans/composer-patches` plugin.
 
 ### PHP-FPM Specific
 

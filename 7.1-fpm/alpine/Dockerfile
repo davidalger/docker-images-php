@@ -2,6 +2,7 @@ FROM php:7.1-fpm-alpine3.9
 
 # Install dependencies
 RUN apk add --no-cache \
+        patch \
         shadow \
         bzip2-dev \
         freetype-dev \
@@ -15,7 +16,6 @@ RUN apk add --no-cache \
         libxslt-dev \
         libzip-dev \
         rabbitmq-c-dev \
-        git \
         bash
 
 # Install required PHP extensions
@@ -50,6 +50,9 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
         amqp \
     && docker-php-ext-enable redis igbinary amqp \
     && apk del .build-deps
+
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /tmp
 
 COPY etc/php.ini /usr/local/etc/php/php.ini
 COPY etc/opcache.ini /usr/local/etc/php/conf.d/05-opcache.ini
