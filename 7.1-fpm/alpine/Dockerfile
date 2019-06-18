@@ -64,5 +64,4 @@ RUN echo "export PS1='\[\033[0;0m\]\u@\h\[\033[0m\]:\[\033[0;31m\]\w\[\033[0m\]#
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data && chown www-data:www-data /var/www/html
 USER www-data
 
-VOLUME  /var/www/html
 WORKDIR /var/www/html
