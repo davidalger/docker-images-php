@@ -52,7 +52,6 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && apk del .build-deps
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_HOME /tmp
 
 COPY etc/php.ini /usr/local/etc/php/php.ini
 COPY etc/opcache.ini /usr/local/etc/php/conf.d/05-opcache.ini
