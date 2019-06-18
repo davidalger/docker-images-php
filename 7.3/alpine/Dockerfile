@@ -44,3 +44,5 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
         amqp \
     && docker-php-ext-enable redis igbinary amqp \
     && apk del .build-deps
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
