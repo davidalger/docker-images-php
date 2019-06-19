@@ -37,7 +37,6 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
         xsl \
         zip \
         pdo_mysql \
-        dom \
         pcntl \
         opcache \
     && pecl channel-update pecl.php.net \
