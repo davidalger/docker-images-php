@@ -15,6 +15,7 @@ RUN apk add --no-cache \
         libxslt-dev \
         libzip-dev \
         rabbitmq-c-dev \
+        npm \
         bash
 
 # Install required PHP extensions
