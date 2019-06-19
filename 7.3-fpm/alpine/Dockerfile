@@ -46,7 +46,7 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
         igbinary \
         redis \
         amqp \
-    && docker-php-ext-enable redis igbinary amqp \
+    && docker-php-ext-enable igbinary redis amqp \
     && apk del .build-deps
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
