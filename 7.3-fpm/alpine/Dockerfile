@@ -2,6 +2,7 @@ FROM php:7.3-fpm-alpine3.9
 
 # Install dependencies
 RUN apk add --no-cache \
+        git \
         patch \
         shadow \
         bzip2-dev \

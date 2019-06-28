@@ -2,6 +2,7 @@ FROM php:7.3-alpine3.9
 
 # Install dependencies
 RUN apk add --no-cache \
+        git \
         patch \
         bzip2-dev \
         freetype-dev \
