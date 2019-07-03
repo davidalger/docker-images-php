@@ -35,6 +35,8 @@ for PHP_VERSION in ${VERSION_LIST}; do
     fi
 
     export PHP_VERSION
+
+    printf "\e[01;31m==> building ${IMAGE_TAG}\033[0m\n"
     docker build -t "${IMAGE_TAG}" --build-arg PHP_VERSION ${BASE_DIR}/${PHP_VARIANT}
 
     [[ $PUSH_FLAG ]] && docker push "${IMAGE_TAG}"
