@@ -28,6 +28,7 @@ RUN if (( ${PHP_VERSION} >= 73 )); \
     && rm -rf /var/cache/yum
 
 RUN useradd www-data \
+	&& chmod 0755 ~www-data \
     && mkdir -p /var/www/html \
     && chown www-data:www-data /var/www/html
 
