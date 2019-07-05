@@ -24,7 +24,7 @@ pushd ${BASE_DIR} >/dev/null
 [[ $PUSH_FLAG ]] && docker login
 
 ## iterate over and build each version/variant combination
-VERSION_LIST="${VERSION_LIST:-"71 72 73"}"
+VERSION_LIST="${VERSION_LIST:-"55 56 70 71 72 73"}"
 VARIANT_LIST="${VARIANT_LIST:-"cli fpm"}"
 
 for PHP_VERSION in ${VERSION_LIST}; do

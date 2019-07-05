@@ -5,6 +5,9 @@
 * 7.3, 7.3-fpm
 * 7.2, 7.2-fpm
 * 7.1, 7.1-fpm
+* 7.0, 7.0-fpm
+* 5.6, 5.6-fpm
+* 5.5, 5.5-fpm
 
 ## Additional Extensions
 

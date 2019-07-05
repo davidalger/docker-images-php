@@ -5,6 +5,7 @@ ARG PHP_EXTENSIONS="bcmath cli common devel gd imap intl json mbstring \
     mcrypt sodium mysqlnd opcache pdo pecl-redis process soap xml xmlrpc"
 
 RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm \
+    && yum-config-manager --enable ius-archive \
     && if (( ${PHP_VERSION} >= 73 )); \
         then PHP_PKG_PREFIX=php${PHP_VERSION}; \
         else PHP_PKG_PREFIX=php${PHP_VERSION}u; \
