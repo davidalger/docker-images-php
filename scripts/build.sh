@@ -25,7 +25,7 @@ pushd ${BASE_DIR} >/dev/null
 
 ## iterate over and build each version/variant combination
 VERSION_LIST="${VERSION_LIST:-"55 56 70 71 72 73"}"
-VARIANT_LIST="${VARIANT_LIST:-"cli fpm"}"
+VARIANT_LIST="${VARIANT_LIST:-"cli fpm sourceguardian"}"
 
 for PHP_VERSION in ${VERSION_LIST}; do
   for PHP_VARIANT in ${VARIANT_LIST}; do
