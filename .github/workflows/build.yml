@@ -1,11 +1,68 @@
 name: Docker Image CI
 on: [push]
 jobs:
-  build:
+  php55:
+    name: PHP 5.5
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - run: ./scripts/build.sh --push
       env:
+        VERSION_LIST: "55"
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  php56:
+    name: PHP 5.6
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: ./scripts/build.sh --push
+      env:
+        VERSION_LIST: "56"
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  php70:
+    name: PHP 7.0
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: ./scripts/build.sh --push
+      env:
+        VERSION_LIST: "70"
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  php71:
+    name: PHP 7.1
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: ./scripts/build.sh --push
+      env:
+        VERSION_LIST: "71"
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  php72:
+    name: PHP 7.2
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: ./scripts/build.sh --push
+      env:
+        VERSION_LIST: "72"
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  php73:
+    name: PHP 7.3
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: ./scripts/build.sh --push
+      env:
+        VERSION_LIST: "73"
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
