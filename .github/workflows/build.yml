@@ -1,5 +1,10 @@
 name: Docker Image CI
-on: [push]
+on:
+  schedule:
+  - cron: "0 4 * * 1"   # 4 AM UTC on Monday
+  push:
+    branches:
+    - master
 jobs:
   php55:
     name: PHP 5.5
