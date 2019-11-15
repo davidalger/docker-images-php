@@ -23,18 +23,11 @@ RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm \
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN if (( ${PHP_VERSION} >= 73 )); \
-		then yum install -y php${PHP_VERSION}-fpm; \
-		else yum install -y php${PHP_VERSION}u-fpm; \
-	fi \
-	&& yum clean all \
+    then yum install -y php${PHP_VERSION}-fpm; \
+    else yum install -y php${PHP_VERSION}u-fpm; \
+  fi \
+  && yum clean all \
     && rm -rf /var/cache/yum
-
-RUN useradd www-data \
-	&& chmod 0755 ~www-data \
-    && mkdir -p /var/www/html \
-    && chown www-data:www-data /var/www/html
-
-WORKDIR /var/www/html
 
 RUN set -eux; \
 	cd /etc; \
@@ -70,4 +63,3 @@ STOPSIGNAL SIGQUIT
 
 EXPOSE 9000
 CMD ["php-fpm"]
-USER www-data
