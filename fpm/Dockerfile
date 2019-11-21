@@ -52,7 +52,8 @@ RUN set -eux; \
 		echo 'listen = 9000'; \
 	} | tee php-fpm.d/zz-docker.conf; \
     perl -pi -e 's/^(pid|error_log|daemonize)/;$1/g' /etc/php-fpm.conf; \
-    perl -pi -e 's/^(listen)/;$1/g' /etc/php-fpm.d/www.conf
+    perl -pi -e 's/^(listen)/;$1/g' /etc/php-fpm.d/www.conf; \
+    perl -pi -e 's/^(php_admin_(value|flag))/;$1/g' /etc/php-fpm.d/www.conf
 
 COPY docker-entrypoint /usr/local/bin
 ENTRYPOINT ["docker-entrypoint"]
