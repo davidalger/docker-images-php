@@ -16,7 +16,7 @@ RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm \
         if [[ ${PKG} = "sodium" ]] && (( ${PHP_VERSION} < 72 )); then continue; fi; \
         PHP_PACKAGES+="${PHP_PKG_PREFIX}-${PKG} "; \
     done \
-    && yum install -y ${PHP_PACKAGES} git npm patch gettext unzip bzip2 \
+    && yum install -y ${PHP_PACKAGES} git2u npm patch gettext unzip bzip2 \
     && yum clean all \
     && rm -rf /var/cache/yum
 
