@@ -1,7 +1,7 @@
 FROM centos:7
 
 ARG PHP_VERSION
-ARG PHP_EXTENSIONS="bcmath cli common devel gd imap intl json mbstring \
+ARG PHP_EXTENSIONS="bcmath cli common devel gd intl json mbstring \
     mcrypt sodium mysqlnd opcache pdo pecl-amqp pecl-redis process soap xml xmlrpc"
 
 RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm \
