@@ -1,5 +1,8 @@
 # PHP Docker Images
 
+![Docker Image CI](https://github.com/davidalger/docker-images-php/workflows/Docker%20Image%20CI/badge.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/davidalger/php.svg?label=Docker%20Pulls)
+
 ## Supported Tags
 
 * 7.3, 7.3-fpm
@@ -32,4 +35,4 @@ These images are based on the `centos:7` image using the IUS RPMs to install PHP
 ## Other Inclusions
 
 * [Composer](https://hub.docker.com/_/composer) copied in from the official `composer` image.
-* The `git`, `patch`, `unzip`, `pwgen` and `npm` packages are pre-installed to accommodate composer and other common build requirements when these images are used in Concourse pipelines or similar.
+* The `git`, `npm`, `patch`, `unzip`, `pwgen` and `nmap-ncat` packages are pre-installed to accommodate composer and other common build requirements when these images are used in Concourse pipelines or similar.
