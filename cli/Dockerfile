@@ -4,6 +4,10 @@ ARG PHP_VERSION
 ARG PHP_EXTENSIONS="bcmath cli common devel gd intl json mbstring \
     mcrypt sodium mysqlnd opcache pdo pecl-redis process soap xml xmlrpc"
 
+RUN yum upgrade -y \
+    && yum clean all \
+    && rm -rf /var/cache/yum
+
 RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm \
     && yum-config-manager --enable ius-archive \
     && if (( ${PHP_VERSION} >= 73 )); \
