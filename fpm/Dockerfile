@@ -1,7 +1,7 @@
 FROM centos:7
 
 ARG PHP_VERSION
-ARG PHP_EXTENSIONS="bcmath cli common devel gd intl json mbstring \
+ARG PHP_EXTENSIONS="bcmath cli common gd intl json mbstring \
     mcrypt sodium mysqlnd opcache pdo pecl-redis process soap xml xmlrpc"
 
 RUN yum upgrade -y \
