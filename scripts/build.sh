@@ -33,7 +33,11 @@ VARIANT_LIST="${VARIANT_LIST:-"cli cli-loaders fpm fpm-loaders"}"
 for PHP_VERSION in ${VERSION_LIST}; do
   for PHP_VARIANT in ${VARIANT_LIST}; do
     IMAGE_TAG="davidalger/php:$(echo ${PHP_VERSION} | sed -E 's/([0-9])([0-9])/\1.\2/')"
-    PHP_VARIANT="$(echo ${PHP_VARIANT} | sed 's/^cli-//')"
+    IMAGE_TAG_SUFFIX="$(echo ${PHP_VARIANT} | sed -E 's/^(cli$|cli-)//')"
+    if [[ ${IMAGE_TAG_SUFFIX} ]]; then
+      IMAGE_TAG+="-${IMAGE_TAG_SUFFIX}"
+    fi
+
     export PHP_VERSION
 
     printf "\e[01;31m==> building ${IMAGE_TAG}\033[0m\n"
