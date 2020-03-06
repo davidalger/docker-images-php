@@ -43,4 +43,4 @@ These images are based on the `centos:7` image using the IUS RPMs to install PHP
 * unzip - list, test and extract compressed files in a ZIP archive (used by composer)
 * pwgen - password generator used in scripting creation of passwords meeting specific criteria
 * ncat - networking utility which reads and writes data across networks from the command line
-* jq — commandline JSON processor for use in scripts and pipelines
+* jq - commandline JSON processor for use in scripts and pipelines
