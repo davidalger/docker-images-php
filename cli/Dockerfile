@@ -8,7 +8,9 @@ RUN yum upgrade -y \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm \
+RUN set -eux \
+    && PHP_VERSION=$(echo ${PHP_VERSION} | awk -F '.' '{print $1$2}') \
+    && yum install -y https://centos7.iuscommunity.org/ius-release.rpm \
     && yum-config-manager --enable ius-archive \
     && if (( ${PHP_VERSION} >= 73 )); \
         then PHP_PKG_PREFIX=php${PHP_VERSION}; \
@@ -24,5 +26,5 @@ RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm \
     && rm -rf /var/cache/yum
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_HOME /tmp
+ENV COMPOSER_HOME /tmp/composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer

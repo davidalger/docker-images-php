@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php_version: [55, 56, 70, 71, 72, 73]
+        php_version: ["5.5", "5.6", "7.0", "7.1", "7.2", "7.3"]
     steps:
     - uses: actions/checkout@v1
     - run: ./scripts/build.sh --push

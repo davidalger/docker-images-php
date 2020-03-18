@@ -2,7 +2,7 @@
 set -e
 trap '>&2 printf "\n\e[01;31mError: Command \`%s\` on line $LINENO failed with exit code $?\033[0m\n" "$BASH_COMMAND"' ERR
 
-## find directory where this script is located following symlinks if neccessary
+## find directory above where this script is located following symlinks if neccessary
 readonly BASE_DIR="$(
   cd "$(
     dirname "$(
@@ -26,8 +26,9 @@ if [[ $PUSH_FLAG ]]; then
     || echo "${DOCKER_PASSWORD:-}" | docker login -u "${DOCKER_USERNAME:-}" --password-stdin
 fi
 
-## iterate over and build each version/variant combination
-VERSION_LIST="${VERSION_LIST:-"55 56 70 71 72 73"}"
+## iterate over and build each version/variant combination; by default building
+## latest version; build matrix will override to build each supported version
+VERSION_LIST="${VERSION_LIST:-"7.3"}"
 VARIANT_LIST="${VARIANT_LIST:-"cli cli-loaders fpm fpm-loaders"}"
 
 for PHP_VERSION in ${VERSION_LIST}; do
