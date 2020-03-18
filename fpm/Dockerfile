@@ -2,7 +2,7 @@ FROM centos:7
 
 ARG PHP_VERSION
 ARG PHP_EXTENSIONS="bcmath cli common gd intl json mbstring \
-    mcrypt sodium mysqlnd opcache pdo pecl-redis process soap xml xmlrpc"
+    mcrypt sodium mysqlnd opcache pdo pecl-redis pecl-imagick process soap xml xmlrpc"
 
 RUN yum upgrade -y \
     && yum clean all \
