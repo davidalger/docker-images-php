@@ -1,8 +1,8 @@
 FROM centos:7
 
 ARG PHP_VERSION
-ARG PHP_EXTENSIONS="bcmath cli common gd intl json mbstring \
-    mcrypt sodium mysqlnd opcache pdo pecl-redis pecl-imagick process soap xml xmlrpc"
+ARG PHP_EXTENSIONS="bcmath cli common gd gmp intl json mbstring \
+    mcrypt sodium mysqlnd opcache pdo pecl-amqp pecl-redis pecl-imagick process soap xml xmlrpc"
 
 RUN yum upgrade -y \
     && yum clean all \
@@ -17,6 +17,7 @@ RUN set -eux \
         else PHP_PKG_PREFIX=php${PHP_VERSION}u; \
     fi \
     && PHP_PACKAGES= && for PKG in ${PHP_EXTENSIONS}; do \
+        if [[ ${PKG} = "pecl-amqp" ]] && (( ${PHP_VERSION} < 71 )); then continue; fi; \
         if [[ ${PKG} = "mcrypt" ]] && (( ${PHP_VERSION} > 71 )); then continue; fi; \
         if [[ ${PKG} = "sodium" ]] && (( ${PHP_VERSION} < 72 )); then continue; fi; \
         PHP_PACKAGES+="${PHP_PKG_PREFIX}-${PKG} "; \
