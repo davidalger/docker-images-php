@@ -3,8 +3,12 @@ on:
   schedule:
   - cron: "0 4 * * 1"   # 4 AM UTC on Monday
   push:
+    paths-ignore:
+    - LICENSE
+    - README.md
     branches:
     - master
+
 jobs:
   build:
     name: PHP ${{ matrix.php_version }}
