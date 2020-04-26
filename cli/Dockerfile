@@ -10,7 +10,7 @@ RUN yum upgrade -y \
 
 RUN set -eux \
     && PHP_VERSION=$(echo ${PHP_VERSION} | awk -F '.' '{print $1$2}') \
-    && yum install -y https://centos7.iuscommunity.org/ius-release.rpm \
+    && yum install -y https://repo.ius.io/ius-release-el7.rpm \
     && yum-config-manager --enable ius-archive \
     && if (( ${PHP_VERSION} >= 73 )); \
         then PHP_PKG_PREFIX=php${PHP_VERSION}; \
