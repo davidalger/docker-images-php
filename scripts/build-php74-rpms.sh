@@ -21,8 +21,8 @@ for PKG_REPO in ${PKG_LIST[@]}; do
   echo "==> Building $PKG_REPO"
   PKG_NAME=$(echo $PKG_REPO | cut -d/ -f2)
 
-  curl -so $PKG_NAME.zip https://github.com/$PKG_REPO/archive/master.zip
-  unzip -d $WORKSPACE $PKG_NAME.zip && cd $WORKSPACE/$PKG_NAME-master
+  curl -sLo $WORKSPACE/$PKG_NAME.zip https://github.com/$PKG_REPO/archive/master.zip
+  unzip -d $WORKSPACE $WORKSPACE/$PKG_NAME.zip && cd $WORKSPACE/$PKG_NAME-master
 
   RPMMACROS=(
     "%_sourcedir $PWD"
