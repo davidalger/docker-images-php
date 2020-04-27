@@ -13,13 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: ./scripts/build-php74-rpms.sh
-
     - uses: actions/upload-artifact@v1
       with:
-        name: srpms
-        path: rpmbuild/SRPMS
-
-    - uses: actions/upload-artifact@v1
-      with:
-        name: rpms
+        name: php74-rpms
         path: rpmbuild/RPMS
