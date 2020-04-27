@@ -14,6 +14,12 @@ PKG_LIST=(
 )
 WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 
+## Workaround an issue currently causing an issue with rpm-builddep due to 404'ing repomd.xml file
+if [[ $(curl -sI http://vault.centos.org/centos/7/extras/Source/repodata/repomd.xml | head -n1) =~ 404 ]]; then
+  yum-config-manager --save --setopt \
+    'extras-source.baseurl=https://archive.kernel.org/centos-vault/centos/$releasever/extras/Source'
+fi
+
 yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm
 yum --assumeyes install yum-utils rpmdevtools unzip @buildsys-build
 
