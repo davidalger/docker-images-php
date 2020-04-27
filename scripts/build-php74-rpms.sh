@@ -24,13 +24,14 @@ for PKG_REPO in ${PKG_LIST[@]}; do
   wget https://github.com/$PKG_REPO/archive/master.zip -O $PKG_NAME.zip
   unzip -d $GITHUB_WORKSPACE $PKG_NAME.zip && cd $GITHUB_WORKSPACE/$PKG_NAME-master
 
-  cat > $HOME/.rpmmacros <<-EOT
-		%_sourcedir $PWD
-		%_specdir $PWD
-		%_topdir $GITHUB_WORKSPACE/rpmbuild
-		%dist .el$RELEASEVER.ius
-		%vendor IUS
-	EOT
+  RPMMACROS=(
+    "%_sourcedir $PWD"
+    "%_specdir $PWD"
+    "%_topdir $WORKSPACE/rpmbuild"
+    "%dist .el$RELEASEVER.ius"
+    "%vendor IUS"
+  )
+  printf "%s\n" "${RPMMACROS[@]}" > $HOME/.rpmmacros
 
   spectool --get-files $PKG_NAME.spec
   rpmbuild -bs $PKG_NAME.spec
