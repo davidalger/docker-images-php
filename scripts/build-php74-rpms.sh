@@ -27,19 +27,20 @@ for PKG_REPO in ${PKG_LIST[@]}; do
   cat > $HOME/.rpmmacros <<-EOT
 		%_sourcedir $PWD
 		%_specdir $PWD
+		%_topdir $PWD
 		%dist .el$RELEASEVER.ius
 		%vendor IUS
 	EOT
 
   spectool --get-files $PKG_NAME.spec
   rpmbuild -bs $PKG_NAME.spec
-  yum-builddep --assumeyes $HOME/rpmbuild/SRPMS/$PKG_NAME-*.src.rpm
+  yum-builddep --assumeyes $PWD/rpmbuild/SRPMS/$PKG_NAME-*.src.rpm
   rpmbuild -bb $PKG_NAME.spec
 
-  PKG_BUILT=$(ls -1 $HOME/rpmbuild/SRPMS/*$PKG_NAME*.src.rpm $HOME/rpmbuild/RPMS/*/*$PKG_NAME*.rpm)
+  PKG_BUILT=$(ls -1 $PWD/rpmbuild/SRPMS/*$PKG_NAME*.src.rpm $PWD/rpmbuild/RPMS/*/*$PKG_NAME*.rpm)
   echo "==> Installing $PKG_BUILT"
   yum install -y $PKG_BUILT
 done
 
 echo "==> Build Artifacts"
-ls -1 $HOME/rpmbuild/SRPMS/*.src.rpm $HOME/rpmbuild/RPMS/*/*.rpm | sort
+ls -1 $PWD/rpmbuild/SRPMS/*.src.rpm $PWD/rpmbuild/RPMS/*/*.rpm | sort
