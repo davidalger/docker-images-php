@@ -5,15 +5,37 @@ on:
     - php74
 
 jobs:
-  php74:
+  php74-rpms:
     name: PHP 7.4 RPMS
     runs-on: ubuntu-latest
     container:
       image: centos:7
     steps:
     - uses: actions/checkout@v1
+
     - run: ./scripts/build-php74-rpms.sh
+
     - uses: actions/upload-artifact@v1
       with:
         name: php74-rpms
         path: rpmbuild/RPMS
+
+  php74-build:
+    name: PHP 7.4
+    runs-on: ubuntu-latest
+    needs:
+    - php74-rpms
+    steps:
+    - uses: actions/checkout@v1
+
+    - uses: actions/download-artifact@v1
+      with:
+        name: php74-rpms
+        path: cli/php7.4/php74-rpms
+
+    - run: ./scripts/build.sh --push
+      env:
+        VERSION_LIST: "7.4"
+        VARIANT_LIST: "cli fpm"
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
