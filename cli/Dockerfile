@@ -4,7 +4,7 @@ ARG PHP_VERSION
 ARG PHP_EXTENSIONS="bcmath cli common gd gmp intl json mbstring \
     mcrypt sodium mysqlnd opcache pdo pecl-amqp pecl-redis pecl-imagick process soap xml xmlrpc"
 
-RUN yum upgrade -y \
+RUN yum upgrade -y --exclude=centos-release \
     && yum clean all \
     && rm -rf /var/cache/yum
 
