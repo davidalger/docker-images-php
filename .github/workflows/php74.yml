@@ -36,6 +36,5 @@ jobs:
     - run: ./scripts/build.sh --push
       env:
         VERSION_LIST: "7.4"
-        VARIANT_LIST: "cli fpm"
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

@@ -5,7 +5,7 @@
 
 ## Supported Tags
 
-* `7.4`, `7.4-fpm`
+* `7.4`, `7.4-loaders`, `7.4-fpm`, `7.4-fpm-loaders`
 * `7.3`, `7.3-loaders`, `7.3-fpm`, `7.3-fpm-loaders`
 * `7.2`, `7.2-loaders`, `7.2-fpm`, `7.2-fpm-loaders`
 * `7.1`, `7.1-loaders`, `7.1-fpm`, `7.1-fpm-loaders`
@@ -15,7 +15,7 @@
 
 The `-loaders` suffix indicates the image includes both Source Guardian and IonCube loaders. These should be used when encoded PHP code is present in the project.
 
-PHP 7.4 images are currently using a custom pipeline to build RPMS from spec files to workaround issues with upstream dependencies which are holding up the process of getting PHP 7.4 published in IUS repositories. IonCube Loaders do not existing (beyond a beta) at this point for 7.4 so the loader image variants have not been created here as of this time. Additionally the PHP 7.4 images are currently missing the `pecl-amqp` and `pecl-imagick` extensions.
+PHP 7.4 images are currently using a custom pipeline to build RPMS from spec files to workaround issues with upstream dependencies which are holding up the process of getting PHP 7.4 published in IUS repositories. Also worth noting is these PHP 7.4 images are currently missing the `pecl-amqp` and `pecl-imagick` extensions.
 
 ## Additional Extensions
 
