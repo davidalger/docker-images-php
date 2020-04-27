@@ -35,8 +35,8 @@ for PKG_REPO in ${PKG_LIST}; do
     "%_sourcedir $PWD"
     "%_specdir $PWD"
     "%_topdir $WORKSPACE/rpmbuild"
-    "%dist .el$RELEASEVER.ius"
-    "%vendor IUS"
+    "%dist .el$RELEASEVER.php74-rpms"
+    "%vendor PHP74-RPMS"
   )
   printf "%s\n" "${RPMMACROS[@]}" > $HOME/.rpmmacros
 
