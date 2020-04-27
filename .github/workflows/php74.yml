@@ -1,0 +1,25 @@
+name: Docker Image CI
+on:
+  push:
+    branches:
+    - php74
+
+jobs:
+  php74:
+    name: PHP 7.4 RPMS
+    runs-on: ubuntu-latest
+    container:
+      image: centos:7
+    steps:
+    - uses: actions/checkout@v1
+    - run: ./scripts/build-php74-rpms.sh
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: srpms
+        path: rpmbuild/SRPMS
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: rpms
+        path: rpmbuild/RPMS
