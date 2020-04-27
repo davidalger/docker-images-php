@@ -22,25 +22,27 @@ for PKG_REPO in ${PKG_LIST[@]}; do
   PKG_NAME=$(echo $PKG_REPO | cut -d/ -f2)
 
   wget https://github.com/$PKG_REPO/archive/master.zip -O $PKG_NAME.zip
-  unzip -d / $PKG_NAME.zip && cd /$PKG_NAME-master
+  unzip -d $GITHUB_WORKSPACE $PKG_NAME.zip && cd $GITHUB_WORKSPACE/$PKG_NAME-master
 
   cat > $HOME/.rpmmacros <<-EOT
 		%_sourcedir $PWD
 		%_specdir $PWD
-		%_topdir $PWD
+		%_topdir $GITHUB_WORKSPACE
 		%dist .el$RELEASEVER.ius
 		%vendor IUS
 	EOT
 
   spectool --get-files $PKG_NAME.spec
   rpmbuild -bs $PKG_NAME.spec
-  yum-builddep --assumeyes $PWD/rpmbuild/SRPMS/$PKG_NAME-*.src.rpm
+  yum-builddep --assumeyes $GITHUB_WORKSPACE/rpmbuild/SRPMS/$PKG_NAME-*.src.rpm
   rpmbuild -bb $PKG_NAME.spec
 
-  PKG_BUILT=$(ls -1 $PWD/rpmbuild/SRPMS/*$PKG_NAME*.src.rpm $PWD/rpmbuild/RPMS/*/*$PKG_NAME*.rpm)
+  PKG_BUILT=$(
+    ls -1 $GITHUB_WORKSPACE/rpmbuild/SRPMS/*$PKG_NAME*.src.rpm $GITHUB_WORKSPACE/rpmbuild/RPMS/*/*$PKG_NAME*.rpm
+  )
   echo "==> Installing $PKG_BUILT"
   yum install -y $PKG_BUILT
 done
 
 echo "==> Build Artifacts"
-ls -1 $PWD/rpmbuild/SRPMS/*.src.rpm $PWD/rpmbuild/RPMS/*/*.rpm | sort
+ls -1 $GITHUB_WORKSPACE/rpmbuild/SRPMS/*.src.rpm $GITHUB_WORKSPACE/rpmbuild/RPMS/*/*.rpm | sort
