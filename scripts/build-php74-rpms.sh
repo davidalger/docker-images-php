@@ -5,6 +5,7 @@ RELEASEVER=7
 PKG_LIST=(
   iusrepo/libzip1
   kelnei/oniguruma6
+  davidalger/jq
   davidalger/php74
   iusrepo/pear1
   kelnei/php74-pecl-apcu
