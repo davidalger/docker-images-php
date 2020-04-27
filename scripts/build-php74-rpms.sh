@@ -27,7 +27,7 @@ for PKG_REPO in ${PKG_LIST[@]}; do
   cat > $HOME/.rpmmacros <<-EOT
 		%_sourcedir $PWD
 		%_specdir $PWD
-		%_topdir $GITHUB_WORKSPACE
+		%_topdir $GITHUB_WORKSPACE/rpmbuild
 		%dist .el$RELEASEVER.ius
 		%vendor IUS
 	EOT
