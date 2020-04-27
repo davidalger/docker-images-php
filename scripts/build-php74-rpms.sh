@@ -21,8 +21,8 @@ if [[ $(curl -sI http://vault.centos.org/centos/7/extras/Source/repodata/repomd.
     'extras-source.baseurl=https://archive.kernel.org/centos-vault/centos/$releasever/extras/Source'
 fi
 
-yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm
-yum --assumeyes install yum-utils rpmdevtools unzip @buildsys-build
+yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm || true
+yum --assumeyes install yum-utils rpmdevtools createrepo unzip @buildsys-build
 
 for PKG_REPO in ${PKG_LIST}; do
   echo "==> Building $PKG_REPO"
@@ -54,3 +54,9 @@ done
 
 echo "==> Build Artifacts"
 ls -1 $WORKSPACE/rpmbuild/SRPMS/*.src.rpm $WORKSPACE/rpmbuild/RPMS/*/*.rpm | sort
+
+echo "==> Creating SRPMS repo"
+createrepo $WORKSPACE/rpmbuild/SRPMS
+
+echo "==> Creating RPMS repo"
+createrepo $WORKSPACE/rpmbuild/RPMS
