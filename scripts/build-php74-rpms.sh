@@ -12,17 +12,17 @@ PKG_LIST=(
   kelnei/php74-pecl-msgpack
   kelnei/php74-pecl-redis
 )
+WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 
-yum install -y wget unzip
 yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm
-yum --assumeyes install yum-utils rpmdevtools @buildsys-build
+yum --assumeyes install yum-utils rpmdevtools unzip @buildsys-build
 
 for PKG_REPO in ${PKG_LIST[@]}; do
   echo "==> Building $PKG_REPO"
   PKG_NAME=$(echo $PKG_REPO | cut -d/ -f2)
 
-  wget https://github.com/$PKG_REPO/archive/master.zip -O $PKG_NAME.zip
-  unzip -d $GITHUB_WORKSPACE $PKG_NAME.zip && cd $GITHUB_WORKSPACE/$PKG_NAME-master
+  curl -so $PKG_NAME.zip https://github.com/$PKG_REPO/archive/master.zip
+  unzip -d $WORKSPACE $PKG_NAME.zip && cd $WORKSPACE/$PKG_NAME-master
 
   RPMMACROS=(
     "%_sourcedir $PWD"
@@ -35,15 +35,15 @@ for PKG_REPO in ${PKG_LIST[@]}; do
 
   spectool --get-files $PKG_NAME.spec
   rpmbuild -bs $PKG_NAME.spec
-  yum-builddep --assumeyes $GITHUB_WORKSPACE/rpmbuild/SRPMS/$PKG_NAME-*.src.rpm
+  yum-builddep --assumeyes $WORKSPACE/rpmbuild/SRPMS/$PKG_NAME-*.src.rpm
   rpmbuild -bb $PKG_NAME.spec
 
   PKG_BUILT=$(
-    ls -1 $GITHUB_WORKSPACE/rpmbuild/SRPMS/*$PKG_NAME*.src.rpm $GITHUB_WORKSPACE/rpmbuild/RPMS/*/*$PKG_NAME*.rpm
+    ls -1 $WORKSPACE/rpmbuild/SRPMS/*$PKG_NAME*.src.rpm $WORKSPACE/rpmbuild/RPMS/*/*$PKG_NAME*.rpm
   )
   echo "==> Installing $PKG_BUILT"
   yum install -y $PKG_BUILT
 done
 
 echo "==> Build Artifacts"
-ls -1 $GITHUB_WORKSPACE/rpmbuild/SRPMS/*.src.rpm $GITHUB_WORKSPACE/rpmbuild/RPMS/*/*.rpm | sort
+ls -1 $WORKSPACE/rpmbuild/SRPMS/*.src.rpm $WORKSPACE/rpmbuild/RPMS/*/*.rpm | sort
