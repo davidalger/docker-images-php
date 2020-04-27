@@ -27,15 +27,14 @@ RUN set -eux \
         PHP_PACKAGES+="${PHP_PKG_PREFIX}-${PKG} "; \
     done \
     && if (( ${PHP_VERSION} == 74 )); then \
-        PHP_EXTENSIONS="${PHP_PACKAGES} php74-pecl-msgpack php74-pecl-igbinary oniguruma6 jq"; \
-        PHP_PACKAGES= && for PKG in ${PHP_EXTENSIONS}; do \
-            RPM="$(find /var/php74-rpms -regex ".*/${PKG}-[0-9\.\-]+.el7.ius.x86_64.rpm")"; \
-            if [[ "${RPM}" ]]; \
-                then PHP_PACKAGES+="${RPM} "; \
-                else echo "Package ${PKG} unavailable"; \
-            fi \
-        done; \
-        yum install -y ${PHP_PACKAGES}; \
+        PHP74_REPO=( \
+            "[php74-rpms]" \
+            "name = PHP 7.4 based on IUS for Enterprise Linux 7" \
+            "baseurl = file:///var/php74-rpms" \
+            "gpgcheck = 0" \
+            "enabled = 1" \
+        ); \
+        printf "%s\n" "${PHP74_REPO[@]}" > /etc/yum.repos.d/php74-rpms.repo; \
     fi \
     && yum install -y ${PHP_PACKAGES} git222 npm patch gettext unzip bzip2 pwgen nmap-ncat jq \
     && yum clean all \
