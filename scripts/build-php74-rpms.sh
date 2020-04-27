@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 set -euo pipefail
 
-RELEASEVER=7
-PKG_LIST=(
+RELEASEVER=${RELEASEVER:-7}
+PKG_LIST=${PKG_LIST:-
   iusrepo/libzip1
   kelnei/oniguruma6
   davidalger/jq
@@ -12,7 +12,7 @@ PKG_LIST=(
   kelnei/php74-pecl-igbinary
   kelnei/php74-pecl-msgpack
   kelnei/php74-pecl-redis
-)
+}
 WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 
 ## Workaround the 404 response on vault.centos.org causing an issue with rpm-builddep
@@ -24,7 +24,7 @@ fi
 yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm
 yum --assumeyes install yum-utils rpmdevtools unzip @buildsys-build
 
-for PKG_REPO in ${PKG_LIST[@]}; do
+for PKG_REPO in ${PKG_LIST}; do
   echo "==> Building $PKG_REPO"
   PKG_NAME=$(echo $PKG_REPO | cut -d/ -f2)
 
