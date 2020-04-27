@@ -8,8 +8,9 @@ RUN yum upgrade -y --exclude=centos-release \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-# When building PHP 7.4 images ./php7.4/php74-rpms will be copied to /tmp/php74-rpms
-COPY Dockerfile php${PHP_VERSION}* /tmp/
+# When building PHP 7.4 images ./php7.4/php74-rpms will be copied to /var/php74-rpms
+COPY Dockerfile php${PHP_VERSION}* /var/
+RUN rm -f /var/Dockerfile
 
 RUN set -eux \
     && PHP_VERSION=$(echo ${PHP_VERSION} | awk -F '.' '{print $1$2}') \
@@ -28,7 +29,7 @@ RUN set -eux \
     && if (( ${PHP_VERSION} == 74 )); then \
         PHP_EXTENSIONS="${PHP_PACKAGES} php74-pecl-msgpack php74-pecl-igbinary oniguruma6 jq"; \
         PHP_PACKAGES= && for PKG in ${PHP_EXTENSIONS}; do \
-            RPM="$(find /tmp/php74-rpms -regex ".*/${PKG}-[0-9\.\-]+.el7.ius.x86_64.rpm")"; \
+            RPM="$(find /var/php74-rpms -regex ".*/${PKG}-[0-9\.\-]+.el7.ius.x86_64.rpm")"; \
             if [[ "${RPM}" ]]; \
                 then PHP_PACKAGES+="${RPM} "; \
                 else echo "Package ${PKG} unavailable"; \
