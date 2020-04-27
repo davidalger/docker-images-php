@@ -5,12 +5,12 @@ RELEASEVER=7
 PKG_LIST=(
   iusrepo/libzip1
   kelnei/oniguruma6
-  # davidalger/php74
-  # iusrepo/pear1
-  # kelnei/php74-pecl-apcu
-  # kelnei/php74-pecl-igbinary
-  # kelnei/php74-pecl-msgpack
-  # kelnei/php74-pecl-redis
+  davidalger/php74
+  iusrepo/pear1
+  kelnei/php74-pecl-apcu
+  kelnei/php74-pecl-igbinary
+  kelnei/php74-pecl-msgpack
+  kelnei/php74-pecl-redis
 )
 
 yum install -y wget unzip
