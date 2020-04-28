@@ -40,6 +40,10 @@ for PKG_REPO in ${PKG_LIST}; do
   )
   printf "%s\n" "${RPMMACROS[@]}" > $HOME/.rpmmacros
 
+  if [[ ${PKG_NAME} =~ xdebug ]]; then
+    printf "%s\n" "%_without_tests 1" >> $HOME/.rpmmacros
+  fi
+
   spectool --get-files $PKG_NAME.spec
   rpmbuild -bs $PKG_NAME.spec
   yum-builddep --assumeyes $WORKSPACE/rpmbuild/SRPMS/$PKG_NAME-*.src.rpm
