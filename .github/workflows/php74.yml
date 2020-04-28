@@ -17,26 +17,26 @@ jobs:
     - name: Echo env
       run: env
       env:
-        PGK_LIST: >-
+        PKG_LIST: >-
           iusrepo/libzip1
           kelnei/oniguruma6
 
     - name: Build dependencies
       run: ./scripts/build-php74-rpms.sh
       env:
-        PGK_LIST: >-
+        PKG_LIST: >-
           iusrepo/libzip1
           kelnei/oniguruma6
 
     - name: Build php74
       run: ./scripts/build-php74-rpms.sh
       env:
-        PGK_LIST: davidalger/php74
+        PKG_LIST: davidalger/php74
 
     - name: Build pecl extensions
       run: ./scripts/build-php74-rpms.sh
       env:
-        PGK_LIST: >-
+        PKG_LIST: >-
           kelnei/php74-pecl-apcu
           kelnei/php74-pecl-igbinary
           kelnei/php74-pecl-msgpack
