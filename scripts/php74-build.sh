@@ -52,9 +52,6 @@ for PKG_REPO in ${PKG_LIST}; do
   yum install -y $PKG_BUILT
 done
 
-echo "==> Build Artifacts"
-ls -1 $WORKSPACE/rpmbuild/SRPMS/*.src.rpm $WORKSPACE/rpmbuild/RPMS/*/*.rpm | sort
-
 echo "==> Creating SRPMS repo"
 createrepo $WORKSPACE/rpmbuild/SRPMS
 

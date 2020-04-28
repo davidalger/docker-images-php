@@ -5,8 +5,8 @@ on:
     - php74
 
 jobs:
-  php74-rpms:
-    name: PHP 7.4 RPMS
+  php74-build:
+    name: PHP 7.4 Build
     runs-on: ubuntu-latest
     container:
       image: centos:7
@@ -14,20 +14,23 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v1
 
-    - name: Build dependencies
-      run: ./scripts/build-php74-rpms.sh
+    - name: Build libzip1
+      run: ./scripts/php74-build.sh
       env:
-        PKG_LIST: >-
-          iusrepo/libzip1
-          kelnei/oniguruma6
+        PKG_LIST: iusrepo/libzip1
+
+    - name: Build oniguruma6
+      run: ./scripts/php74-build.sh
+      env:
+        PKG_LIST: kelnei/oniguruma6
 
     - name: Build php74
-      run: ./scripts/build-php74-rpms.sh
+      run: ./scripts/php74-build.sh
       env:
         PKG_LIST: davidalger/php74
 
     - name: Build pecl extensions
-      run: ./scripts/build-php74-rpms.sh
+      run: ./scripts/php74-build.sh
       env:
         PKG_LIST: >-
           kelnei/php74-pecl-apcu
@@ -39,28 +42,41 @@ jobs:
           davidalger/php74-pecl-xdebug
 
     - name: Build jq
-      run: ./scripts/build-php74-rpms.sh
+      run: ./scripts/php74-build.sh
       env:
         PKG_LIST: davidalger/jq
 
-    - name: Upload php74-rpms artifact
+    - name: Upload php74
       uses: actions/upload-artifact@v1
       with:
-        name: php74-rpms
+        name: php74
         path: rpmbuild/RPMS
 
-  php74-build:
+    - name: Upload php74-src
+      uses: actions/upload-artifact@v1
+      with:
+        name: php74-src
+        path: rpmbuild/SRPMS
+
+  php74:
     name: PHP 7.4
     runs-on: ubuntu-latest
     needs:
-    - php74-rpms
+    - php74-build
     steps:
     - uses: actions/checkout@v1
 
-    - uses: actions/download-artifact@v1
+    - name: Download php74
+      uses: actions/download-artifact@v1
       with:
-        name: php74-rpms
-        path: cli/php7.4/php74-rpms
+        name: php74
+        path: cli/php7.4/php74
+
+    - name: Download php74-src
+      uses: actions/download-artifact@v1
+      with:
+        name: php74-src
+        path: cli/php7.4/php74-src
 
     - run: ./scripts/build.sh --push
       env:
