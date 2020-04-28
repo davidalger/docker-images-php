@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 set -euo pipefail
+set -x
+
+env
 
 RELEASEVER=${RELEASEVER:-7}
 PKG_LIST=${PKG_LIST:-

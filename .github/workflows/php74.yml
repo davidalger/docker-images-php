@@ -14,6 +14,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v1
 
+    - name: Echo env
+      run: env
+      env:
+        PGK_LIST: >-
+          iusrepo/libzip1
+          kelnei/oniguruma6
+
     - name: Build dependencies
       run: ./scripts/build-php74-rpms.sh
       env:
