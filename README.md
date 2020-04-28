@@ -34,7 +34,7 @@ These images are based on the `centos:7` image using the IUS RPMs to install PHP
 * pdo
 * pecl-amqp
 * pecl-redis
-* pecl-imagick
+* pecl-imagick (7.2 and later)
 * process
 * soap
 * xml

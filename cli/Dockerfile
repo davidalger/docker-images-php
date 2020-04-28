@@ -24,6 +24,7 @@ RUN set -eux \
     fi \
     && PHP_PACKAGES= && for PKG in ${PHP_EXTENSIONS}; do \
         if [[ ${PKG} = "pecl-amqp" ]] && (( ${PHP_VERSION} < 71 )); then continue; fi; \
+        if [[ ${PKG} = "pecl-imagick" ]] && (( ${PHP_VERSION} < 72 )); then continue; fi; \
         if [[ ${PKG} = "pecl-zip" ]] && (( ${PHP_VERSION} < 74 )); then continue; fi; \
         if [[ ${PKG} = "mcrypt" ]] && (( ${PHP_VERSION} > 71 )); then continue; fi; \
         if [[ ${PKG} = "sodium" ]] && (( ${PHP_VERSION} < 72 )); then continue; fi; \
