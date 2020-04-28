@@ -7,7 +7,6 @@ PKG_LIST=${PKG_LIST:-
   kelnei/oniguruma6
   davidalger/jq
   davidalger/php74
-  iusrepo/pear1
   kelnei/php74-pecl-apcu
   kelnei/php74-pecl-igbinary
   kelnei/php74-pecl-msgpack
@@ -23,6 +22,7 @@ fi
 
 yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm || true
 yum --assumeyes install yum-utils rpmdevtools createrepo unzip @buildsys-build
+yum --assumeyes install https://repo.ius.io/ius-release-el$(rpm -E %rhel).rpm || true
 
 for PKG_REPO in ${PKG_LIST}; do
   echo "==> Building $PKG_REPO"
