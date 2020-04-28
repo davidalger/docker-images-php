@@ -13,9 +13,32 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - run: ./scripts/build-php74-rpms.sh
+    - name: build dependencies
+      run: ./scripts/build-php74-rpms.sh
+      env:
+        PGK_LIST: >-
+          iusrepo/libzip1
+          kelnei/oniguruma6
 
-    - run: ./scripts/build-php74-rpms.sh
+    - name: build php74
+      run: ./scripts/build-php74-rpms.sh
+      env:
+        PGK_LIST: davidalger/php74
+
+    - name: build pecl extensions
+      run: ./scripts/build-php74-rpms.sh
+      env:
+        PGK_LIST: >-
+          kelnei/php74-pecl-apcu
+          kelnei/php74-pecl-igbinary
+          kelnei/php74-pecl-msgpack
+          kelnei/php74-pecl-redis
+          davidalger/php74-pecl-amqp
+          davidalger/php74-pecl-imagick
+          davidalger/php74-pecl-xdebug
+
+    - name: build jq
+      run: ./scripts/build-php74-rpms.sh
       env:
         PKG_LIST: davidalger/jq
 
