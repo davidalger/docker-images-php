@@ -15,7 +15,9 @@ RUN rm -f /var/Dockerfile
 RUN set -eux \
     && PHP_VERSION=$(echo ${PHP_VERSION} | awk -F '.' '{print $1$2}') \
     && yum install -y https://repo.ius.io/ius-release-el7.rpm \
-    && yum-config-manager --enable ius-archive \
+    && if (( ${PHP_VERSION} <= 71 )); then \
+        yum-config-manager --enable ius-archive; \
+    fi \
     && if (( ${PHP_VERSION} >= 73 )); \
         then PHP_PKG_PREFIX=php${PHP_VERSION}; \
         else PHP_PKG_PREFIX=php${PHP_VERSION}u; \
