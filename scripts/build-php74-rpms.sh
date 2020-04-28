@@ -17,12 +17,6 @@ PKG_LIST=${PKG_LIST:-
 }
 WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 
-## Workaround the 404 response on vault.centos.org causing an issue with rpm-builddep
-if [[ $(curl -sI http://vault.centos.org/centos/7/extras/Source/repodata/repomd.xml | head -n1) =~ 404 ]]; then
-  yum-config-manager --save --setopt \
-    'extras-source.baseurl=https://archive.kernel.org/centos-vault/centos/$releasever/extras/Source'
-fi
-
 yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm || true
 yum --assumeyes install yum-utils rpmdevtools createrepo unzip @buildsys-build
 yum --assumeyes install https://repo.ius.io/ius-release-el$(rpm -E %rhel).rpm || true
