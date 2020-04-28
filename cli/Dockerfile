@@ -38,7 +38,7 @@ RUN set -eux \
             "name = PHP 7.4 based on IUS for Enterprise Linux 7 - Source" \
             "baseurl = file:///var/php74-src" \
             "gpgcheck = 0" \
-            "enabled = 1" \
+            "enabled = 0" \
         ); \
         printf "%s\n" "${PHP74_REPO[@]}" > /etc/yum.repos.d/php74.repo; \
     fi \
