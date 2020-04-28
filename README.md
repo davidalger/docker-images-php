@@ -15,7 +15,7 @@
 
 The `-loaders` suffix indicates the image includes both Source Guardian and IonCube loaders. These should be used when encoded PHP code is present in the project.
 
-PHP 7.4 images are currently using a custom pipeline to build RPMS from spec files to workaround issues with upstream dependencies which are holding up the process of getting PHP 7.4 published in IUS repositories. Also worth noting is these PHP 7.4 images are currently missing the `pecl-amqp` and `pecl-imagick` extensions.
+PHP 7.4 images are currently using a custom pipeline to build RPMS from spec files to workaround issues with upstream dependencies which are holding up the process of getting PHP 7.4 published in IUS repositories. These RPMS are pulished inside the container image as a local RPM repository at `/var/php74-rpms` so they can be installed normally via `yum` per usual.
 
 ## Additional Extensions
 

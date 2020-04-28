@@ -11,6 +11,9 @@ PKG_LIST=${PKG_LIST:-
   kelnei/php74-pecl-igbinary
   kelnei/php74-pecl-msgpack
   kelnei/php74-pecl-redis
+  davidalger/php74-pecl-amqp
+  davidalger/php74-pecl-imagick
+  davidalger/php74-pecl-xdebug
 }
 WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 
