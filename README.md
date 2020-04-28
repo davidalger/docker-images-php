@@ -39,6 +39,7 @@ These images are based on the `centos:7` image using the IUS RPMs to install PHP
 * soap
 * xml
 * xmlrpc
+* zip
 
 ## Other Inclusions
 

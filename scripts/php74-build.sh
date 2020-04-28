@@ -13,6 +13,7 @@ PKG_LIST=${PKG_LIST:-
   davidalger/php74-pecl-amqp
   davidalger/php74-pecl-imagick
   davidalger/php74-pecl-xdebug
+  davidalger/php74-pecl-zip
 }
 WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 
