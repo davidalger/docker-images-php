@@ -15,6 +15,10 @@ jobs:
 
     - run: ./scripts/build-php74-rpms.sh
 
+    - run: ./scripts/build-php74-rpms.sh
+      env:
+        PKG_LIST: davidalger/jq
+
     - uses: actions/upload-artifact@v1
       with:
         name: php74-rpms

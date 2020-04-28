@@ -5,7 +5,6 @@ RELEASEVER=${RELEASEVER:-7}
 PKG_LIST=${PKG_LIST:-
   iusrepo/libzip1
   kelnei/oniguruma6
-  davidalger/jq
   davidalger/php74
   kelnei/php74-pecl-apcu
   kelnei/php74-pecl-igbinary
