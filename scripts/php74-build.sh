@@ -3,7 +3,6 @@ set -euo pipefail
 
 RELEASEVER=${RELEASEVER:-7}
 PKG_LIST=${PKG_LIST:-
-  iusrepo/libzip1
   kelnei/oniguruma6
   davidalger/php74
   kelnei/php74-pecl-apcu
@@ -39,6 +38,10 @@ for PKG_REPO in ${PKG_LIST}; do
 
   if [[ ${PKG_NAME} =~ xdebug ]]; then
     printf "%s\n" "%_without_tests 1" >> $HOME/.rpmmacros
+  fi
+
+  if [[ ${PKG_NAME} =~ pecl-zip ]]; then
+    yum install libzip1-devel --enablerepo ius-testing
   fi
 
   spectool --get-files $PKG_NAME.spec
