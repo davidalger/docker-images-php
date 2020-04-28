@@ -41,7 +41,7 @@ for PKG_REPO in ${PKG_LIST}; do
   fi
 
   if [[ ${PKG_NAME} =~ pecl-zip ]]; then
-    yum install libzip1-devel --enablerepo ius-testing
+    yum install -y libzip1-devel --enablerepo ius-testing
   fi
 
   spectool --get-files $PKG_NAME.spec
