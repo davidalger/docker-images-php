@@ -11,21 +11,22 @@ jobs:
     container:
       image: centos:7
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout repository
+      uses: actions/checkout@v1
 
-    - name: build dependencies
+    - name: Build dependencies
       run: ./scripts/build-php74-rpms.sh
       env:
         PGK_LIST: >-
           iusrepo/libzip1
           kelnei/oniguruma6
 
-    - name: build php74
+    - name: Build php74
       run: ./scripts/build-php74-rpms.sh
       env:
         PGK_LIST: davidalger/php74
 
-    - name: build pecl extensions
+    - name: Build pecl extensions
       run: ./scripts/build-php74-rpms.sh
       env:
         PGK_LIST: >-
@@ -37,12 +38,13 @@ jobs:
           davidalger/php74-pecl-imagick
           davidalger/php74-pecl-xdebug
 
-    - name: build jq
+    - name: Build jq
       run: ./scripts/build-php74-rpms.sh
       env:
         PKG_LIST: davidalger/jq
 
-    - uses: actions/upload-artifact@v1
+    - name: Upload php74-rpms artifact
+      uses: actions/upload-artifact@v1
       with:
         name: php74-rpms
         path: rpmbuild/RPMS
