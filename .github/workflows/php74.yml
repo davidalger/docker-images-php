@@ -14,6 +14,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v1
 
+    - name: Build libzip1
+      run: ./scripts/php74-build.sh
+      env:
+        PKG_LIST: iusrepo/libzip1
+
     - name: Build oniguruma6
       run: ./scripts/php74-build.sh
       env:
