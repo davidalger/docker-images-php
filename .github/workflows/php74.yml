@@ -20,6 +20,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v1
 
+    # Some builds fail with the following error; seems to be due to first encountering a
+    # timeout on connect to :443 on the IPv4 address, resulting in then trying the IPv6
+    # curl: (7) Failed to connect to 2a02:cb40:200::1ad: Cannot assign requested address
+    - name: Download php74 sources
+      run: |
+        set -eux
+        mkdir -p ${GITHUB_WORKSPACE}/php74-master
+        for FILE_NAME in php-7.4.5.tar.xz php-7.4.5.tar.xz.asc; do
+          curl --connect-timeout 10 --retry 30 --ipv4 \
+            -vLo ${GITHUB_WORKSPACE}/php74-master/$FILE_NAME \
+            https://www.php.net/distributions/$FILE_NAME
+        done
+
     - name: Build libzip1
       run: ./scripts/php74-build.sh
       env:
