@@ -36,7 +36,7 @@ for PKG_REPO in ${PKG_LIST}; do
   )
   printf "%s\n" "${RPMMACROS[@]}" > $HOME/.rpmmacros
 
-  if [[ ${PKG_NAME} =~ php74 ]]; then
+  if [[ ${PKG_NAME} = php74 ]]; then
     cat $WORKSPACE/patches/php74-gd-flags.patch | patch -p1
   fi
 
