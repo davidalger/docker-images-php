@@ -27,7 +27,7 @@ jobs:
       run: |
         set -eux
         mkdir -p ${GITHUB_WORKSPACE}/php74-master
-        for FILE_NAME in php-7.4.5.tar.xz php-7.4.5.tar.xz.asc; do
+        for FILE_NAME in php-7.4.6.tar.xz php-7.4.6.tar.xz.asc; do
           curl --connect-timeout 10 --retry 30 --ipv4 \
             -vLo ${GITHUB_WORKSPACE}/php74-master/$FILE_NAME \
             https://www.php.net/distributions/$FILE_NAME
