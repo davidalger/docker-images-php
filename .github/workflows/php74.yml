@@ -59,7 +59,7 @@ jobs:
           davidalger/php74-pecl-amqp
           davidalger/php74-pecl-imagick
           davidalger/php74-pecl-xdebug
-          davidalger/php74-pecl-zip
+          iusrepo/php74-pecl-zip
 
     - name: Build jq
       run: ./scripts/php74-build.sh
