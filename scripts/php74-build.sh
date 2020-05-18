@@ -36,10 +36,6 @@ for PKG_REPO in ${PKG_LIST}; do
   )
   printf "%s\n" "${RPMMACROS[@]}" > $HOME/.rpmmacros
 
-  if [[ ${PKG_NAME} = php74 ]]; then
-    cat $WORKSPACE/patches/php74-gd-flags.patch | patch -p1
-  fi
-
   if [[ ${PKG_NAME} =~ xdebug ]]; then
     printf "%s\n" "%_without_tests 1" >> $HOME/.rpmmacros
   fi
