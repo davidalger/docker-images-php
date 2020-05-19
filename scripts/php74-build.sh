@@ -4,7 +4,7 @@ set -euo pipefail
 RELEASEVER=${RELEASEVER:-7}
 PKG_LIST=${PKG_LIST:-
   kelnei/oniguruma6
-  davidalger/php74
+  iusrepo/php74
   kelnei/php74-pecl-apcu
   kelnei/php74-pecl-igbinary
   kelnei/php74-pecl-msgpack

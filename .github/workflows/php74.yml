@@ -46,7 +46,7 @@ jobs:
     - name: Build php74
       run: ./scripts/php74-build.sh
       env:
-        PKG_LIST: davidalger/php74
+        PKG_LIST: iusrepo/php74
 
     - name: Build pecl extensions
       run: ./scripts/php74-build.sh
