@@ -33,16 +33,6 @@ jobs:
             https://www.php.net/distributions/$FILE_NAME
         done
 
-    - name: Build libzip1
-      run: ./scripts/php74-build.sh
-      env:
-        PKG_LIST: iusrepo/libzip1
-
-    - name: Build oniguruma6
-      run: ./scripts/php74-build.sh
-      env:
-        PKG_LIST: kelnei/oniguruma6
-
     - name: Build php74
       run: ./scripts/php74-build.sh
       env:
@@ -60,11 +50,6 @@ jobs:
           davidalger/php74-pecl-imagick
           davidalger/php74-pecl-xdebug
           iusrepo/php74-pecl-zip
-
-    - name: Build jq
-      run: ./scripts/php74-build.sh
-      env:
-        PKG_LIST: davidalger/jq
 
     - name: Upload php74
       uses: actions/upload-artifact@v1
