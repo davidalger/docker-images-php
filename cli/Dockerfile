@@ -31,9 +31,7 @@ RUN set -eux \
         PHP_PACKAGES+="${PHP_PKG_PREFIX}-${PKG} "; \
     done \
     && if (( ${PHP_VERSION} == 74 )); then \
-        yum install -y \
-            https://kojipkgs.fedoraproject.org//packages/oniguruma/6.8.2/1.el7/x86_64/oniguruma-6.8.2-1.el7.x86_64.rpm \
-            https://kojipkgs.fedoraproject.org//packages/jq/1.6/2.el7/x86_64/jq-1.6-2.el7.x86_64.rpm; \
+        yum install -y oniguruma jq --enablerepo epel-testing; \
         yum install -y libzip1 --enablerepo ius-testing; \
         PHP74_REPO=( \
             "[php74]" \

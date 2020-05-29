@@ -15,16 +15,13 @@ PKG_LIST=${PKG_LIST:-
 }
 WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 
-# Install artifacts from testing-candidate until published in epel7
-# https://bodhi.fedoraproject.org/updates/FEDORA-EPEL-2020-101619ac61
-yum --assumeyes install \
-  https://kojipkgs.fedoraproject.org//packages/oniguruma/6.8.2/1.el7/x86_64/oniguruma-6.8.2-1.el7.x86_64.rpm \
-  https://kojipkgs.fedoraproject.org//packages/oniguruma/6.8.2/1.el7/x86_64/oniguruma-devel-6.8.2-1.el7.x86_64.rpm \
-  || true # don't fail if already installed
-
 yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm || true
 yum --assumeyes install yum-utils rpmdevtools createrepo unzip @buildsys-build
 yum --assumeyes install https://repo.ius.io/ius-release-el$(rpm -E %rhel).rpm || true
+
+# Install oniguruma-devel from epel-testing to include following build
+# https://bodhi.fedoraproject.org/updates/FEDORA-EPEL-2020-101619ac61
+yum install -y oniguruma-devel --enablerepo epel-testing
 
 for PKG_REPO in ${PKG_LIST}; do
   echo "==> Building $PKG_REPO"
