@@ -9,9 +9,9 @@ readonly BASE_DIR="$(
       (readlink "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}") \
         | sed -e "s#^../#$(dirname "$(dirname "${BASH_SOURCE[0]}")")/#"
     )"
-  )" >/dev/null \
+  )/.." >/dev/null \
   && pwd
-)/.."
+)"
 pushd ${BASE_DIR} >/dev/null
 
 ## if --push is passed as first argument to script, this will login to docker hub and push images
