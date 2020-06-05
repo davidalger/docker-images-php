@@ -3,15 +3,14 @@ set -euo pipefail
 
 RELEASEVER=${RELEASEVER:-7}
 PKG_LIST=${PKG_LIST:-
-  iusrepo/php74
-  kelnei/php74-pecl-apcu
+  iusrepo/php74-pecl-zip
+  iusrepo/php74-pecl-apcu
   kelnei/php74-pecl-igbinary
   kelnei/php74-pecl-msgpack
   kelnei/php74-pecl-redis
   davidalger/php74-pecl-amqp
   davidalger/php74-pecl-imagick
   davidalger/php74-pecl-xdebug
-  iusrepo/php74-pecl-zip
 }
 WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 
@@ -19,9 +18,8 @@ yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-lates
 yum --assumeyes install yum-utils rpmdevtools createrepo unzip @buildsys-build
 yum --assumeyes install https://repo.ius.io/ius-release-el$(rpm -E %rhel).rpm || true
 
-# Install oniguruma-devel from epel-testing to include following build
-# https://bodhi.fedoraproject.org/updates/FEDORA-EPEL-2020-101619ac61
-yum install -y oniguruma-devel --enablerepo epel-testing
+yum-config-manager --enable ius-testing
+yum-config-manager --enable epel-testing
 
 for PKG_REPO in ${PKG_LIST}; do
   echo "==> Building $PKG_REPO"
@@ -41,10 +39,6 @@ for PKG_REPO in ${PKG_LIST}; do
 
   if [[ ${PKG_NAME} =~ xdebug ]]; then
     printf "%s\n" "%_without_tests 1" >> $HOME/.rpmmacros
-  fi
-
-  if [[ ${PKG_NAME} =~ pecl-zip ]]; then
-    yum install -y libzip1-devel --enablerepo ius-testing
   fi
 
   spectool --get-files $PKG_NAME.spec

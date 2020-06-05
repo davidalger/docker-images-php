@@ -31,8 +31,8 @@ RUN set -eux \
         PHP_PACKAGES+="${PHP_PKG_PREFIX}-${PKG} "; \
     done \
     && if (( ${PHP_VERSION} == 74 )); then \
-        yum install -y oniguruma jq --enablerepo epel-testing; \
-        yum install -y libzip1 --enablerepo ius-testing; \
+        yum-config-manager --enable ius-testing; \
+        yum-config-manager --enable epel-testing; \
         PHP74_REPO=( \
             "[php74]" \
             "name = PHP 7.4 based on IUS for Enterprise Linux 7" \
