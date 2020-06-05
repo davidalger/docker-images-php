@@ -6,9 +6,9 @@ PKG_LIST=${PKG_LIST:-
   iusrepo/php74-pecl-zip
   iusrepo/php74-pecl-amqp
   iusrepo/php74-pecl-apcu
-  davidalger/php74-pecl-igbinary
-  davidalger/php74-pecl-msgpack
-  davidalger/php74-pecl-redis
+  iusrepo/php74-pecl-igbinary
+  iusrepo/php74-pecl-msgpack
+  iusrepo/php74-pecl-redis
   davidalger/php74-pecl-imagick
   davidalger/php74-pecl-xdebug
 }
