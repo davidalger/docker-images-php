@@ -9,8 +9,8 @@ PKG_LIST=${PKG_LIST:-
   iusrepo/php74-pecl-igbinary
   iusrepo/php74-pecl-msgpack
   iusrepo/php74-pecl-redis
-  davidalger/php74-pecl-imagick
-  davidalger/php74-pecl-xdebug
+  iusrepo/php74-pecl-imagick
+  iusrepo/php74-pecl-xdebug
 }
 WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 
