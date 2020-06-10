@@ -9,13 +9,11 @@
 * `7.3`, `7.3-loaders`, `7.3-fpm`, `7.3-fpm-loaders`
 * `7.2`, `7.2-loaders`, `7.2-fpm`, `7.2-fpm-loaders`
 
-The `-loaders` suffix indicates the image includes both Source Guardian and IonCube loaders. These should be used when encoded PHP code is present in the project.
-
-PHP 7.4 images are currently using a custom pipeline to build RPMS from spec files to workaround issues with upstream dependencies which are holding up the process of getting PHP 7.4 published in IUS repositories. These can be found inside the container image at `/var/php74` and `/var/php74-src` where they are located for use as a local RPM repository.
+The `-loaders` suffix indicates the image includes both Source Guardian and IonCube loaders. These should only be used when encoded PHP is present in a project.
 
 ## Archived Tags
 
-The following tags are no longer updated as they are for PHP versions which have reached EOL. Additionally due to ImageMagick updates coinciding with the release of EL 7.8 the `*-pecl-imagick` extensions for these older versions will no longer install on the CentOS 7 base image.
+The following tags are no longer updated as they are for PHP versions which have reached EOL. Due to ImageMagick updates coinciding with the release of EL 7.8 the `*-pecl-imagick` extensions for these older versions will no longer build successfully on a current base image. Versions of PHP 7.1 and prior have `mcrypt` installed rather than the `sodium` extension.
 
 * `7.1`, `7.1-loaders`, `7.1-fpm`, `7.1-fpm-loaders`
 * `7.0`, `7.0-loaders`, `7.0-fpm`, `7.0-fpm-loaders`
@@ -32,8 +30,7 @@ These images are based on the `centos:7` image using the IUS RPMs to install PHP
 * intl
 * json
 * mbstring
-* mcrypt (7.1 and lower)
-* sodium (7.2 and greater)
+* sodium
 * mysqlnd
 * opcache
 * pdo
