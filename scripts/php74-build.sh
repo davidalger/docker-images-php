@@ -4,10 +4,6 @@ set -euo pipefail
 RELEASEVER=${RELEASEVER:-7}
 PKG_LIST=${PKG_LIST:-
   iusrepo/php74-pecl-amqp
-  iusrepo/php74-pecl-apcu
-  iusrepo/php74-pecl-igbinary
-  iusrepo/php74-pecl-msgpack
-  iusrepo/php74-pecl-redis
   iusrepo/php74-pecl-imagick
   iusrepo/php74-pecl-xdebug
 }
