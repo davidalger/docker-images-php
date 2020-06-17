@@ -14,7 +14,6 @@ yum --assumeyes install yum-utils rpmdevtools createrepo unzip @buildsys-build
 yum --assumeyes install https://repo.ius.io/ius-release-el$(rpm -E %rhel).rpm || true
 
 yum-config-manager --enable ius-testing
-yum-config-manager --enable epel-testing
 
 for PKG_REPO in ${PKG_LIST}; do
   echo "==> Building $PKG_REPO"

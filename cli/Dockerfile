@@ -32,7 +32,6 @@ RUN set -eux \
     done \
     && if (( ${PHP_VERSION} == 74 )); then \
         yum-config-manager --enable ius-testing; \
-        yum-config-manager --enable epel-testing; \
         PHP74_REPO=( \
             "[php74]" \
             "name = PHP 7.4 based on IUS for Enterprise Linux 7" \
