@@ -3,7 +3,6 @@ set -euo pipefail
 
 RELEASEVER=${RELEASEVER:-7}
 PKG_LIST=${PKG_LIST:-
-  iusrepo/php74-pecl-amqp
   iusrepo/php74-pecl-imagick
   iusrepo/php74-pecl-xdebug
 }
@@ -12,8 +11,6 @@ WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"
 yum --assumeyes install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm || true
 yum --assumeyes install yum-utils rpmdevtools createrepo unzip @buildsys-build
 yum --assumeyes install https://repo.ius.io/ius-release-el$(rpm -E %rhel).rpm || true
-
-yum-config-manager --enable ius-testing
 
 for PKG_REPO in ${PKG_LIST}; do
   echo "==> Building $PKG_REPO"
