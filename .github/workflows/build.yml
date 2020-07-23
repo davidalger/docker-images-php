@@ -1,7 +1,7 @@
 name: Docker Image CI
 on:
   schedule:
-  - cron: "0 4 * * 1"   # 4 AM UTC on Monday
+  - cron: "0 4 1 * *"   # 4 AM UTC on 1st day of month
   push:
     paths-ignore:
     - LICENSE
