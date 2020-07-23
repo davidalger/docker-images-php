@@ -8,17 +8,12 @@
 * `7.4`, `7.4-loaders`, `7.4-fpm`, `7.4-fpm-loaders`
 * `7.3`, `7.3-loaders`, `7.3-fpm`, `7.3-fpm-loaders`
 * `7.2`, `7.2-loaders`, `7.2-fpm`, `7.2-fpm-loaders`
-
-The `-loaders` suffix indicates the image includes both Source Guardian and IonCube loaders. These should only be used when encoded PHP is present in a project.
-
-## Archived Tags
-
-The following tags are no longer updated as these versions of PHP have reached EOL.
-
 * `7.1`, `7.1-loaders`, `7.1-fpm`, `7.1-fpm-loaders`
 * `7.0`, `7.0-loaders`, `7.0-fpm`, `7.0-fpm-loaders`
 * `5.6`, `5.6-loaders`, `5.6-fpm`, `5.6-fpm-loaders`
 * `5.5`, `5.5-loaders`, `5.5-fpm`, `5.5-fpm-loaders`
+
+The `-loaders` suffix indicates the image includes both Source Guardian and IonCube loaders. These should only be used when encoded PHP is present in a project.
 
 ## Additional Extensions
 
