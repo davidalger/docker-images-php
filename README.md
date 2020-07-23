@@ -13,7 +13,7 @@ The `-loaders` suffix indicates the image includes both Source Guardian and IonC
 
 ## Archived Tags
 
-The following tags are no longer updated as these versions of PHP have reached EOL. Versions of PHP 7.1 and prior have `mcrypt` installed rather than the `sodium` extension.
+The following tags are no longer updated as these versions of PHP have reached EOL.
 
 * `7.1`, `7.1-loaders`, `7.1-fpm`, `7.1-fpm-loaders`
 * `7.0`, `7.0-loaders`, `7.0-fpm`, `7.0-fpm-loaders`
@@ -42,6 +42,8 @@ These images are based on the `centos:7` image using the IUS RPMs to install PHP
 * xml
 * xmlrpc
 * zip
+
+Versions of PHP 7.1 and prior have `mcrypt` installed rather than the `sodium` extension.
 
 ## Other Inclusions
 
