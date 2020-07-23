@@ -24,12 +24,14 @@ RUN set -eux \
     fi \
     && PHP_PACKAGES= && for PKG in ${PHP_EXTENSIONS}; do \
         if [[ ${PKG} = "pecl-amqp" ]] && (( ${PHP_VERSION} < 71 )); then continue; fi; \
-        if [[ ${PKG} = "pecl-imagick" ]] && (( ${PHP_VERSION} < 72 )); then continue; fi; \
         if [[ ${PKG} = "pecl-zip" ]] && (( ${PHP_VERSION} < 74 )); then continue; fi; \
         if [[ ${PKG} = "mcrypt" ]] && (( ${PHP_VERSION} > 71 )); then continue; fi; \
         if [[ ${PKG} = "sodium" ]] && (( ${PHP_VERSION} < 72 )); then continue; fi; \
         PHP_PACKAGES+="${PHP_PKG_PREFIX}-${PKG} "; \
     done \
+    && if (( ${PHP_VERSION} <= 72 )); then \
+        yum --enablerepo C7.7.1908-base install -y ImageMagick-6.7.8.9-18.el7; \
+    fi \
     && if (( ${PHP_VERSION} == 74 )); then \
         yum-config-manager --enable ius-testing; \
         PHP74_REPO=( \

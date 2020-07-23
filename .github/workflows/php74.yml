@@ -24,7 +24,6 @@ jobs:
       run: ./scripts/php74-build.sh
       env:
         PKG_LIST: >-
-          iusrepo/php74-pecl-imagick
           iusrepo/php74-pecl-xdebug
 
     - name: Upload php74

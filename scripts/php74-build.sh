@@ -3,7 +3,6 @@ set -euo pipefail
 
 RELEASEVER=${RELEASEVER:-7}
 PKG_LIST=${PKG_LIST:-
-  iusrepo/php74-pecl-imagick
   iusrepo/php74-pecl-xdebug
 }
 WORKSPACE="${GITHUB_WORKSPACE:-"$HOME"}"

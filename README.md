@@ -13,7 +13,7 @@ The `-loaders` suffix indicates the image includes both Source Guardian and IonC
 
 ## Archived Tags
 
-The following tags are no longer updated as they are for PHP versions which have reached EOL. Due to ImageMagick updates coinciding with the release of EL 7.8 the `*-pecl-imagick` extensions for these older versions will no longer build successfully on a current base image. Versions of PHP 7.1 and prior have `mcrypt` installed rather than the `sodium` extension.
+The following tags are no longer updated as these versions of PHP have reached EOL. Versions of PHP 7.1 and prior have `mcrypt` installed rather than the `sodium` extension.
 
 * `7.1`, `7.1-loaders`, `7.1-fpm`, `7.1-fpm-loaders`
 * `7.0`, `7.0-loaders`, `7.0-fpm`, `7.0-fpm-loaders`
