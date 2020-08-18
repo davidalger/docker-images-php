@@ -8,10 +8,6 @@ RUN yum update -y \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-# When building PHP 7.4 images copy ./php7.4/php74 and ./php7.4/php74-src into /var/
-COPY Dockerfile php${PHP_VERSION}* /var/
-RUN rm -f /var/Dockerfile
-
 RUN set -eux \
     && PHP_VERSION=$(echo ${PHP_VERSION} | awk -F '.' '{print $1$2}') \
     && yum install -y https://repo.ius.io/ius-release-el7.rpm \
