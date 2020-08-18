@@ -15,9 +15,6 @@ RUN set -eux \
         yum-config-manager --enable ius-archive; \
         yum --enablerepo C7.7.1908-base install -y ImageMagick-6.7.8.9-18.el7; \
     fi \
-    && if (( ${PHP_VERSION} == 74 )); then \
-        yum-config-manager --enable ius-testing; \
-    fi \
     && if (( ${PHP_VERSION} >= 73 )); \
         then PHP_PKG_PREFIX=php${PHP_VERSION}; \
         else PHP_PKG_PREFIX=php${PHP_VERSION}u; \
