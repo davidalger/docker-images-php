@@ -1,6 +1,8 @@
 FROM centos:7
 
+ARG IMAGE_NAME
 ARG PHP_VERSION
+ARG IMAGE_SUFFIX
 ARG PHP_EXTENSIONS="bcmath cli common gd gmp intl json mbstring \
     mcrypt sodium mysqlnd opcache pdo pecl-amqp pecl-redis pecl-imagick pecl-zip process soap xml xmlrpc"
 

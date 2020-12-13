@@ -1,5 +1,7 @@
+ARG IMAGE_NAME
 ARG PHP_VERSION
-FROM davidalger/php:${PHP_VERSION}-fpm
+ARG IMAGE_SUFFIX
+FROM ${IMAGE_NAME}:${PHP_VERSION}${IMAGE_SUFFIX}-fpm
 
 # Install and enable Source Gaurdian loader
 RUN PHP_VERSION=$(php -v | head -n1 | cut -d' ' -f2 | cut -d. -f1-2) \
