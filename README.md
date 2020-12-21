@@ -26,6 +26,7 @@ These images are based on the `centos:7` image using the Remi's RPMs Repository 
 * intl
 * json
 * mbstring
+* msgpack
 * sodium
 * mysqlnd
 * opcache
