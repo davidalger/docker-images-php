@@ -38,31 +38,23 @@ fi
 VERSION_LIST="${VERSION_LIST:-"7.3"}"
 VARIANT_LIST="${VARIANT_LIST:-"cli cli-loaders fpm fpm-loaders"}"
 
-export IMAGE_NAME="${IMAGE_NAME:-"davidalger/php"}"
-DEFAULT_PACKAGE_REPO="${DEFAULT_PACKAGE_REPO:-"ius"}"
-BUILD_PACKAGE_REPO_LIST="${BUILD_PACKAGE_REPO_LIST:-"ius remi"}"
-for BUILD_PACKAGE_REPO in ${BUILD_PACKAGE_REPO_LIST}; do
+IMAGE_NAME="davidalger/php"
   for BUILD_VERSION in ${VERSION_LIST}; do
     MAJOR_VERSION="$(echo "${BUILD_VERSION}" | sed -E 's/([0-9])([0-9])/\1.\2/')"
     for BUILD_VARIANT in ${VARIANT_LIST}; do
       # Configure build args specific to this image build
       export PHP_VERSION="${MAJOR_VERSION}"
+    BUILD_ARGS=(PHP_VERSION)
 
       # Build the image passing list of tags and build args
-      printf "\e[01;31m==> building %s:%s (%s, %s repository)\033[0m\n" \
-        "${IMAGE_NAME}" "${BUILD_VERSION}" "${BUILD_VARIANT}" "${BUILD_PACKAGE_REPO}"
+    printf "\e[01;31m==> building %s:%s (%s)\033[0m\n" \
+      "${IMAGE_NAME}" "${BUILD_VERSION}" "${BUILD_VARIANT}"
+
+    docker build -t "${IMAGE_NAME}:build" "${BUILD_VARIANT}" $(printf -- "--build-arg %s " "${BUILD_ARGS[@]}")
 
       # Strip the term 'cli' from tag suffix as this is the default variant
       TAG_SUFFIX="$(echo "${BUILD_VARIANT}" | sed -E 's/^(cli$|cli-)//')"
       [[ ${TAG_SUFFIX} ]] && TAG_SUFFIX="-${TAG_SUFFIX}"
-
-      export IMAGE_SUFFIX=""
-      [[ "${BUILD_PACKAGE_REPO}" != "${DEFAULT_PACKAGE_REPO}" ]] && IMAGE_SUFFIX="-${BUILD_PACKAGE_REPO}"
-      [[ ${IMAGE_SUFFIX} ]] && TAG_SUFFIX="${IMAGE_SUFFIX}${TAG_SUFFIX}"
-
-      BUILD_ARGS=(PHP_VERSION)
-      docker build -t "${IMAGE_NAME}:build" "${BUILD_VARIANT}/${BUILD_PACKAGE_REPO}" \
-        $(printf -- "--build-arg %s " "${BUILD_ARGS[@]}")
 
       # Fetch the precise php version from the built image and tag it
       MINOR_VERSION="$(docker run --rm -t --entrypoint php "${IMAGE_NAME}:build" -r 'echo phpversion();')"
@@ -79,7 +71,6 @@ for BUILD_PACKAGE_REPO in ${BUILD_PACKAGE_REPO_LIST}; do
         echo "Successfully tagged ${TAG}"
         [[ $PUSH_FLAG ]] && docker push "${TAG}"
       done
-      docker rmi -f "${IMAGE_NAME}:build"
-    done
+    docker image rm "${IMAGE_NAME}:build"
   done
 done

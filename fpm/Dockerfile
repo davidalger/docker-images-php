@@ -1,7 +1,5 @@
-ARG IMAGE_NAME
 ARG PHP_VERSION
-ARG IMAGE_SUFFIX
-FROM ${IMAGE_NAME}:${PHP_VERSION}${IMAGE_SUFFIX}
+FROM davidalger/php:${PHP_VERSION}
 
 RUN set -eux \
     && PHP_VERSION=$(php -v | head -n1 | cut -d' ' -f2 | awk -F '.' '{print $1$2}') \
