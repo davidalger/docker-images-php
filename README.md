@@ -5,7 +5,7 @@
 
 ## Supported Tags
 
-* `8.0`, `8.0-loaders`, `8.0-fpm`, `8.0-fpm-loaders`
+* `8.0`, `8.0-fpm`
 * `7.4`, `7.4-loaders`, `7.4-fpm`, `7.4-fpm-loaders`
 * `7.3`, `7.3-loaders`, `7.3-fpm`, `7.3-fpm-loaders`
 * `7.2`, `7.2-loaders`, `7.2-fpm`, `7.2-fpm-loaders`
