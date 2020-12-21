@@ -11,14 +11,17 @@ RUN yum update -y \
 RUN set -eux \
     && PHP_VERSION=$(echo ${PHP_VERSION} | awk -F '.' '{print $1$2}') \
     && yum install -y epel-release \
+    && yum install -y https://repo.ius.io/ius-release-el7.rpm \
     && yum install -y https://rpms.remirepo.net/enterprise/remi-release-7.rpm \
     && yum-config-manager --enable remi-php${PHP_VERSION} \
+    && yum-config-manager --disable ius \
     && PHP_PACKAGES= && for PKG in ${PHP_EXTENSIONS}; do \
         if [[ ${PKG} = "mcrypt" ]] && (( ${PHP_VERSION} > 71 )); then continue; fi; \
         if [[ ${PKG} = "sodium" ]] && (( ${PHP_VERSION} < 72 )); then continue; fi; \
         PHP_PACKAGES+="php-${PKG} "; \
     done \
-    && yum install -y php ${PHP_PACKAGES} perl which git npm patch gettext unzip bzip2 pwgen nmap-ncat jq \
+    && yum install -y php ${PHP_PACKAGES} perl which npm patch gettext unzip bzip2 pwgen nmap-ncat jq \
+    && yum install -y --enablerepo=ius git222 \
     && yum clean all \
     && rm -rf /var/cache/yum
 
