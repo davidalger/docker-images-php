@@ -25,12 +25,11 @@ RUN set -eux \
     && yum clean all \
     && rm -rf /var/cache/yum
 
+RUN set -eux \
+    && cp /etc/php.ini /etc/php-cli.ini \
+    && perl -pi -e 's/memory_limit(.*)/memory_limit=-1/g' /etc/php-cli.ini
+
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /tmp/composer
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
-
-RUN cp /etc/php.ini /etc/php-cli.ini
-
-RUN set -eux; \
-    perl -pi -e 's/memory_limit(.*)/memory_limit=-1/g' /etc/php-cli.ini
