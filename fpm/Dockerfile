@@ -2,11 +2,7 @@ ARG PHP_VERSION
 FROM davidalger/php:${PHP_VERSION}
 
 RUN set -eux \
-    && PHP_VERSION=$(php -v | head -n1 | cut -d' ' -f2 | awk -F '.' '{print $1$2}') \
-    && if (( ${PHP_VERSION} >= 73 )); \
-        then yum install -y php${PHP_VERSION}-fpm; \
-        else yum install -y php${PHP_VERSION}u-fpm; \
-    fi \
+    && yum install -y php-fpm \
     && yum clean all \
     && rm -rf /var/cache/yum
 
