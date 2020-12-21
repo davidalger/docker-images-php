@@ -2,7 +2,6 @@ ARG PHP_VERSION
 FROM davidalger/php:${PHP_VERSION}
 
 RUN set -eux \
-    && PHP_VERSION=$(php -v | head -n1 | cut -d' ' -f2 | awk -F '.' '{print $1$2}') \
     && yum install -y php-fpm \
     && yum clean all \
     && rm -rf /var/cache/yum
@@ -31,8 +30,7 @@ RUN set -eux; \
 	} | tee php-fpm.d/zz-docker.conf; \
     perl -pi -e 's/^(pid|error_log|daemonize)/;$1/g' /etc/php-fpm.conf; \
     perl -pi -e 's/^(listen)/;$1/g' /etc/php-fpm.d/www.conf; \
-    perl -pi -e 's/^(php_admin_(value|flag))/;$1/g' /etc/php-fpm.d/www.conf; \
-    perl -pi -e 's/memory_limit(.*)/memory_limit=-1/g' /etc/php-cli.ini
+    perl -pi -e 's/^(php_admin_(value|flag))/;$1/g' /etc/php-fpm.d/www.conf
 
 COPY docker-entrypoint /usr/local/bin
 ENTRYPOINT ["docker-entrypoint"]
