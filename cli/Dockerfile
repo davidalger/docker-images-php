@@ -11,14 +11,15 @@ RUN yum update -y \
 RUN set -eux \
     && PHP_VERSION=$(echo ${PHP_VERSION} | awk -F '.' '{print $1$2}') \
     && yum install -y epel-release \
-    && rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm \
+    && yum install -y https://rpms.remirepo.net/enterprise/remi-release-7.rpm \
+    && yum-config-manager --enable remi-php${PHP_VERSION} \
     && PHP_PACKAGES= && for PKG in ${PHP_EXTENSIONS}; do \
         if [[ ${PKG} = "pecl-amqp" ]] && (( ${PHP_VERSION} < 71 )); then continue; fi; \
         if [[ ${PKG} = "mcrypt" ]] && (( ${PHP_VERSION} > 71 )); then continue; fi; \
         if [[ ${PKG} = "sodium" ]] && (( ${PHP_VERSION} < 72 )); then continue; fi; \
         PHP_PACKAGES+="php-${PKG} "; \
     done \
-    && yum --enablerepo=remi-php${PHP_VERSION} install -y php ${PHP_PACKAGES} perl which git npm patch gettext unzip bzip2 pwgen nmap-ncat jq \
+    && yum install -y php ${PHP_PACKAGES} perl which git npm patch gettext unzip bzip2 pwgen nmap-ncat jq \
     && yum clean all \
     && rm -rf /var/cache/yum
 

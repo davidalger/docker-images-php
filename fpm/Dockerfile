@@ -3,7 +3,7 @@ FROM davidalger/php:${PHP_VERSION}
 
 RUN set -eux \
     && PHP_VERSION=$(php -v | head -n1 | cut -d' ' -f2 | awk -F '.' '{print $1$2}') \
-    && yum --enablerepo=remi-php${PHP_VERSION} install -y php-fpm \
+    && yum install -y php-fpm \
     && yum clean all \
     && rm -rf /var/cache/yum
 
