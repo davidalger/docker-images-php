@@ -18,7 +18,7 @@ The `-loaders` suffix indicates the image includes both Source Guardian and IonC
 
 ## Additional Extensions
 
-These images are based on the `centos:7` image using the Remi's RPMs Repository to install PHP including the following extensions:
+These images are based on the `centos:8` image using the Remi's RPMs Repository to install PHP including the following extensions:
 
 * bcmath
 * gd
