@@ -36,7 +36,7 @@ fi
 ## iterate over and build each version/variant combination; by default building
 ## latest version; build matrix will override to build each supported version
 VERSION_LIST="${VERSION_LIST:-"7.3"}"
-VARIANT_LIST="${VARIANT_LIST:-"cli cli-loaders fpm fpm-loaders cli-centos8 cli-loaders-centos8 fpm-centos8 fpm-loaders-centos8"}"
+VARIANT_LIST="${VARIANT_LIST:-"cli cli-loaders fpm fpm-loaders"}"
 
 IMAGE_NAME="davidalger/php"
 for BUILD_VERSION in ${VERSION_LIST}; do
