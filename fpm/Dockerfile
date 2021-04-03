@@ -1,5 +1,6 @@
+ARG IMAGE_NAME="davidalger/php"
 ARG PHP_VERSION
-FROM davidalger/php:${PHP_VERSION}
+FROM ${IMAGE_NAME}:${PHP_VERSION}
 
 RUN set -eux \
     && yum install -y php-fpm \
