@@ -3,9 +3,9 @@ ARG PHP_VERSION
 FROM ${IMAGE_NAME}:${PHP_VERSION}
 
 RUN set -eux \
-    && yum install -y php-fpm \
-    && yum clean all \
-    && rm -rf /var/cache/yum
+    && dnf install -y php-fpm \
+    && dnf clean all \
+    && rm -rf /var/cache/dnf
 
 RUN set -eux; \
 	cd /etc; \

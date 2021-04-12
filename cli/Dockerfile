@@ -6,10 +6,9 @@ ARG PHP_EXTENSIONS="bcmath cli common gd gmp intl json mbstring \
 
 RUN dnf update -y \
     && dnf clean all \
-    && rm -rf /var/cache/yum
+    && rm -rf /var/cache/dnf
 
 RUN set -eux \
-    && dnf install -y yum-utils \
     && dnf install -y epel-release \
     && dnf install -y https://rpms.remirepo.net/enterprise/remi-release-8.rpm \
     && dnf module reset php \
@@ -22,7 +21,7 @@ RUN set -eux \
     done \
     && dnf install -y ${PHP_PACKAGES} git perl which npm patch gettext unzip bzip2 pwgen nmap-ncat jq \
     && dnf clean all \
-    && rm -rf /var/cache/yum
+    && rm -rf /var/cache/dnf
 
 RUN set -eux \
     && cp /etc/php.ini /etc/php-cli.ini \
