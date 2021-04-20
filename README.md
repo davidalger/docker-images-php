@@ -5,16 +5,16 @@
 
 ## Supported Tags
 
+Images are built and tagged using both stable and version specific tags to support pinning downstream builds to latest available for `7.4` or to a specific version such as `7.14.16`. Please reference the [image repository](https://hub.docker.com/r/davidalger/php/tags) on Docker Hub for a complete list of available tags. Builds are automatically run on the 1st of each month and/or when changes are pushed to the master branch of this repository.
+
 * `8.0`, `8.0-fpm`
 * `7.4`, `7.4-loaders`, `7.4-fpm`, `7.4-fpm-loaders`
 * `7.3`, `7.3-loaders`, `7.3-fpm`, `7.3-fpm-loaders`
 * `7.2`, `7.2-loaders`, `7.2-fpm`, `7.2-fpm-loaders`
-* `7.1`, `7.1-loaders`, `7.1-fpm`, `7.1-fpm-loaders`
-* `7.0`, `7.0-loaders`, `7.0-fpm`, `7.0-fpm-loaders`
-* `5.6`, `5.6-loaders`, `5.6-fpm`, `5.6-fpm-loaders`
-* `5.5`, `5.5-loaders`, `5.5-fpm`, `5.5-fpm-loaders`
 
 The `-loaders` suffix indicates the image includes both Source Guardian and IonCube loaders. These should only be used when encoded PHP is present in a project.
+
+Images for older versions of PHP may be available (see Docker Hub for available tags) but they are no longer actively maintained.
 
 ## Additional Extensions
 
@@ -39,8 +39,6 @@ These images are based on the `centos:8` image using the Remi's RPMs Repository 
 * xml
 * xmlrpc
 * zip
-
-Versions of PHP 7.1 and prior have `mcrypt` installed rather than the `sodium` extension.
 
 ## Other Inclusions
 
