@@ -8,8 +8,14 @@ RUN PHP_VERSION=$(php -v | head -n1 | cut -d' ' -f2 | cut -d. -f1-2) \
     && cd /tmp/sourceguardian \
     && curl -Os https://www.sourceguardian.com/loaders/download/loaders.linux-x86_64.tar.gz \
     && tar xzf loaders.linux-x86_64.tar.gz \
-    && cp ixed.${PHP_VERSION}.lin "$(php -i | grep '^extension_dir =' | cut -d' ' -f3)/sourceguardian.so" \
-    && echo "extension=sourceguardian.so" > /etc/php.d/15-sourceguardian.ini \
+    && SOURCEGUARDIAN_LOADER_PATH=ixed.${PHP_VERSION}.lin \
+    && if [[ -f ${SOURCEGUARDIAN_LOADER_PATH} ]]; then \
+        cp ${SOURCEGUARDIAN_LOADER_PATH} "$(php -i | grep '^extension_dir =' | cut -d' ' -f3)/sourceguardian.so" \
+            && echo "extension=sourceguardian.so" > /etc/php.d/15-sourceguardian.ini; \
+    else \
+        >&2 printf "\033[33mWARNING\033[0m: Source Gaurdian loaders for PHP_VERSION %s could not be found at %s\n" \
+            "${PHP_VERSION}" "${SOURCEGUARDIAN_LOADER_PATH}"; \
+    fi \
     && rm -rf /tmp/sourceguardian
 
 # Install and enable IonCube loader
