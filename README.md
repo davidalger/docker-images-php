@@ -19,7 +19,7 @@ Images for older versions of PHP may be available (see Docker Hub for available 
 
 ## Additional Extensions
 
-These images are based on the `centos:8` image using the Remi's RPMs Repository to install PHP including the following extensions:
+These images are built top of the official CentOS Stream 8 images using Remi's RPMs Repository to install PHP and include the following extensions:
 
 * bcmath
 * gd
