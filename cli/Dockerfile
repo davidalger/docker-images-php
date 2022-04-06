@@ -19,7 +19,7 @@ RUN set -eux \
         if [[ ${PKG} = "sodium" ]] && (( ${PHP_VERSION} < 72 )); then continue; fi; \
         PHP_PACKAGES+="php-${PKG} "; \
     done \
-    && dnf install -y ${PHP_PACKAGES} git perl which npm patch gettext unzip bzip2 pwgen nmap-ncat jq \
+    && dnf install -y ${PHP_PACKAGES} git perl which npm patch gettext unzip bzip2 pwgen procps nmap-ncat jq \
     && dnf clean all \
     && rm -rf /var/cache/dnf
 
