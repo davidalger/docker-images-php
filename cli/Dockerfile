@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:stream8
+FROM almalinux
 
 ARG PHP_VERSION
 ARG PHP_EXTENSIONS="bcmath cli common gd gmp intl json mbstring \
